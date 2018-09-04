@@ -7,13 +7,15 @@ describe('Park', function() {
   let dino1;
   let dino2;
   let dino3;
+  let dino4;
   let park;
 
   beforeEach(function () {
     park = new Park('Jurassic Park', 10);
     dino1 = new Dinosaur('t-rex', 'carnivore', 10)
     dino2 = new Dinosaur('diplodocus', 'omnivore', 20)
-    dino3 = new Dinosaur('velociraptor', 'omnivore', 25)
+    dino3 = new Dinosaur('raptor', 'omnivore', 25)
+    dino4 = new Dinosaur('t-rex', 'carnivore', 5)
   })
 
   it('should have a name', function(){
@@ -57,10 +59,17 @@ describe('Park', function() {
     park.addDinosaur(dino1);
     park.addDinosaur(dino2);
     park.addDinosaur(dino3);
-    const actual = park.getDinosaursOfSpecies('omnivore');
-    assert.strictEqual(actual, [dino2, dino3]);
+    park.addDinosaur(dino4);
+    const actual = park.getDinosaursOfSpecies('t-rex');
+    assert.deepStrictEqual(actual, [dino1, dino4]);
   });
 
-  it('should be able to remove all dinosaurs of a particular species');
-
+  it('should be able to remove all dinosaurs of a particular species', function(){
+    park.addDinosaur(dino1);
+    park.addDinosaur(dino2);
+    park.addDinosaur(dino3);
+    park.addDinosaur(dino4);
+    park.removeDinosaursOfSpecies('t-rex');
+    assert(park.dinosaurs, [dino2, dino3]);
+  });
 });

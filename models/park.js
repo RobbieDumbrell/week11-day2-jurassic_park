@@ -31,13 +31,23 @@ Park.prototype.getMostPopularDinosaur = function(){
 
 Park.prototype.getDinosaursOfSpecies = function(givenSpecies){
     let dinosaursOfGivenSpecies = [];
-    
+
     for (const dinosaur of this.dinosaurs){
         if (dinosaur.species === givenSpecies){
          dinosaursOfGivenSpecies.push(dinosaur);
         }
     }
     return dinosaursOfGivenSpecies;
+}
+
+Park.prototype.removeDinosaursOfSpecies = function(givenSpecies){
+    let remainingDinosaurs = [];
+    for (const dinosaur of this.dinosaurs){
+        if (dinosaur.species !== givenSpecies){
+            remainingDinosaurs.push(dinosaur);
+        }
+    }
+    this.dinosaurs = remainingDinosaurs;
 }
 
 module.exports = Park;
