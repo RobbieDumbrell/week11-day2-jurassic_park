@@ -70,6 +70,43 @@ describe('Park', function() {
     park.addDinosaur(dino3);
     park.addDinosaur(dino4);
     park.removeDinosaursOfSpecies('t-rex');
-    assert(park.dinosaurs, [dino2, dino3]);
+    assert.deepStrictEqual(park.dinosaurs, [dino2, dino3]);
   });
+
+  it('should be able to calculate total visitors per day based on dinosaurs', function(){
+    park.addDinosaur(dino1);
+    park.addDinosaur(dino2);
+    park.addDinosaur(dino3);
+    park.addDinosaur(dino4);
+    assert.strictEqual(park.calculateDailyVisitors(), 60);
+  });
+
+  it('should be able to calculate total visitors per year based on dinosaurs', function(){
+    park.addDinosaur(dino1);
+    park.addDinosaur(dino2);
+    park.addDinosaur(dino3);
+    park.addDinosaur(dino4);
+    assert.strictEqual(park.calculateYearlyVisitors(), 21900);
+  });
+
+  it('should be able to calculate yearly revenue based on dinosaurs', function(){
+    park.addDinosaur(dino1);
+    park.addDinosaur(dino2);
+    park.addDinosaur(dino3);
+    park.addDinosaur(dino4);
+    assert.strictEqual(park.calculateYearlyRevenue(), 219000);
+  })
+
+  it('should be able to generate diet requirements for all dinosaurs', function(){
+    park.addDinosaur(dino1);
+    park.addDinosaur(dino2);
+    park.addDinosaur(dino3);
+    park.addDinosaur(dino4);
+    const expected = {
+      'carnivore': 2,
+      'omnivore': 2
+    };
+    assert.deepStrictEqual(park.getDinoDietRequirements(), expected);
+  })
+
 });
